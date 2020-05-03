@@ -17,14 +17,14 @@ data = {}
 
 def save_values(key,value):
     if REDIS_URL:
-        redis_db = redis.drom_url(REDIS_URL)
+        redis_db = redis.from_url(REDIS_URL)
         redis_db.set(key, value)
     else:
         data[key] = value
 
 def load_values(key, default):
     if REDIS_URL:
-        redis_db = redis.drom_url(REDIS_URL)
+        redis_db = redis.from_url(REDIS_URL)
         return redis_db.get(key, default)
     else:
         return data.get(key, default)
@@ -64,7 +64,7 @@ def main_handler(message):
         answers_array = QUESTIONS['answers']
         array = []
         for var in answers_array:
-            array.append(types.KeyboardButton(var)) 1
+            array.append(types.KeyboardButton(var))
         random.shuffle(array)
         keyboard.add(*array)
         bot.reply_to(message, QUESTIONS['question'], reply_markup=keyboard)
@@ -112,24 +112,24 @@ def complexity(message):
         #data['states'][message.from_user.id] = MAIN_STATE
         #change_data('states', str(message.from_user.id), MAIN_STATE)
         #change_data('user_complexity', str(message.from_user.id), 1)
-        save_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE)
         save_values('complexity: {user_id}'.format(user_id=message.from_user.id), 1)
+        save_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE)
     elif message.text == '2 сложность':
         bot.reply_to(message, 'Продолжим с вопросами 2-ой сложности?', reply_markup=keyboard_main)
         #data['user_complexity'][message.from_user.id] = 2
         #data['states'][message.from_user.id] = MAIN_STATE
         #change_data('states', str(message.from_user.id), MAIN_STATE)
         #change_data('user_complexity', str(message.from_user.id), 2)
-        save_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE)
         save_values('complexity: {user_id}'.format(user_id=message.from_user.id), 2)
+        save_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE)
     elif message.text == '3 сложность':
         bot.reply_to(message, 'Продолжим с вопросами 3-ей сложности?', reply_markup=keyboard_main)
         #data['user_complexity'][message.from_user.id] = 3
         #data['states'][message.from_user.id] = MAIN_STATE
         #change_data('states', str(message.from_user.id), MAIN_STATE)
         #change_data('user_complexity', str(message.from_user.id), 3)
-        save_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE)
         save_values('complexity: {user_id}'.format(user_id=message.from_user.id), 3)
+        save_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE)
     elif message.text == 'Назад.':
         bot.reply_to(message, 'Продолжим с прежней сложностью?', reply_markup=keyboard_main)
         #data['states'][message.from_user.id] = MAIN_STATE
