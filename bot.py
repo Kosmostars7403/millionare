@@ -27,7 +27,8 @@ def save_values(key, value):
 def load_values(key, k):
     if REDIS_URL:
         redis_db = redis.from_url(REDIS_URL)
-        return redis_db.get(key, k)
+        if redis_db.get(key) == 'None':
+            return k
     else:
         return data.get(key, k)
 
@@ -139,5 +140,7 @@ def complexity(message):
         # change_data('states', str(message.from_user.id), MAIN_STATE)
         save_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE)
 
+x = {'jggjj': 'jb', 'gii':'hbi'}
+x.get('key', 'hui')
 
 bot.polling()
