@@ -13,7 +13,9 @@ bot = telebot.TeleBot(token)
 telebot.apihelper.proxy = {'https': 'socks5://stepik.akentev.com:1080'}
 
 data = {}
-
+MAIN_STATE = 'main'
+QUESTION_ASK = 'question'
+COMPLEXITY_CHOOSE = 'complexity'
 
 def save_values(key, value):
     if REDIS_URL:
@@ -22,21 +24,14 @@ def save_values(key, value):
     else:
         data[key] = value
 
-
 def load_values(key, k):
     if REDIS_URL:
         redis_db = redis.from_url(REDIS_URL)
-        return redis_db.get(key, default = k)
+        return redis_db.get(key, k)
     else:
-        return data.get(key, default)
-
+        return data.get(key, k)
 
 scores = {'victories': 0, 'defeats': 0}
-
-MAIN_STATE = 'main'
-QUESTION_ASK = 'question'
-COMPLEXITY_CHOOSE = 'complexity'
-
 
 # data = {'states': {}, 'user_complexity':{}, MAIN_STATE:{}, QUESTION_ASK:{}, COMPLEXITY_CHOOSE:{}}
 
