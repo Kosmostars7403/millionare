@@ -10,7 +10,6 @@ token = os.environ["TELEGRAM_TOKEN"]
 REDIS_URL = os.environ.get('REDIS_URL')
 redis_db = redis.from_url(REDIS_URL)
 bot = telebot.TeleBot(token)
-telebot.apihelper.proxy = {'https': 'socks5://stepik.akentev.com:1080'}
 
 raw_data = redis_db.get('data')
 if raw_data is None:
