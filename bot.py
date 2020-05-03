@@ -29,6 +29,8 @@ def load_values(key, k):
         redis_db = redis.from_url(REDIS_URL)
         if redis_db.get(key) == 'None':
             return k
+        else:
+            redis_db.get(key)
     else:
         return data.get(key, k)
 
