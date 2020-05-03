@@ -52,7 +52,7 @@ keyboard_main.add(types.KeyboardButton('Задай вопрос!'), types.Keyboa
 
 # @bot.message_handler(func=lambda message: data['states'].get(str(message.from_user.id), MAIN_STATE) == MAIN_STATE)
 @bot.message_handler(
-    func=lambda message: load_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE) == MAIN_STATE)
+    func=lambda message: load_values('state: {user_id}'.format(user_id=message.from_user.id)) == MAIN_STATE)
 def main_handler(message):
     comp = load_values('complexity: {user_id}'.format(user_id=message.from_user.id), 1)
     global QUESTIONS
@@ -87,8 +87,7 @@ def main_handler(message):
         bot.reply_to(message, 'я тебя не понял')
 
 
-@bot.message_handler(func=lambda message: load_values('state: {user_id}'.format(user_id=message.from_user.id),
-                                                      MAIN_STATE) == QUESTION_ASK)
+@bot.message_handler(func=lambda message: load_values('state: {user_id}'.format(user_id=message.from_user.id)) == QUESTION_ASK)
 def question_ask(message):
     print(message)
     if message.text == QUESTIONS['answers'][0]:
@@ -105,8 +104,7 @@ def question_ask(message):
         save_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE)
 
 
-@bot.message_handler(func=lambda message: load_values('state: {user_id}'.format(user_id=message.from_user.id),
-                                                      MAIN_STATE) == COMPLEXITY_CHOOSE)
+@bot.message_handler(func=lambda message: load_values('state: {user_id}'.format(user_id=message.from_user.id)) == COMPLEXITY_CHOOSE)
 def complexity(message):
     print(message)
     if message.text == '1 сложность':
