@@ -30,7 +30,7 @@ def load_values(key, k):
         if redis_db.get(key) == 'None':
             return k
         else:
-            redis_db.get(key)
+            return redis_db.get(key)
     else:
         return data.get(key, k)
 
