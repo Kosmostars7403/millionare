@@ -7,7 +7,7 @@ import json
 import redis
 
 token = os.environ["TELEGRAM_TOKEN"]
-REDIS_URL = os.environ['REDIS_URL']
+REDIS_URL = os.environ.get('REDIS_URL')
 
 bot = telebot.TeleBot(token)
 telebot.apihelper.proxy = {'https': 'socks5://stepik.akentev.com:1080'}
@@ -141,8 +141,5 @@ def complexity(message):
         # data['states'][message.from_user.id] = MAIN_STATE
         # change_data('states', str(message.from_user.id), MAIN_STATE)
         save_values('state: {user_id}'.format(user_id=message.from_user.id), MAIN_STATE)
-
-x = {'jggjj': 'jb', 'gii':'hbi'}
-x.get('key', 'hui')
 
 bot.polling()
