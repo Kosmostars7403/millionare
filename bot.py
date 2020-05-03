@@ -24,15 +24,12 @@ def save_values(key, value):
     else:
         data[key] = value
 
-def load_values(key, k):
+def load_values(key):
     if REDIS_URL:
         redis_db = redis.from_url(REDIS_URL)
-        if redis_db.get(key) == 'None':
-            return k
-        else:
-            return redis_db.get(key)
+        return redis_db.get(key)
     else:
-        return data.get(key, k)
+        return data.get(key)
 
 scores = {'victories': 0, 'defeats': 0}
 
