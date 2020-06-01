@@ -114,4 +114,5 @@ def complexity(message):
     else:
         change_data('states', str(message.from_user.id), MAIN_STATE)
 
-bot.polling()
+if __name__ == '__main__':
+    bot.polling()
